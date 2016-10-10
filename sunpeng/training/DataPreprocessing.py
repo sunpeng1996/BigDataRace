@@ -9,9 +9,9 @@ reload(sys)
 
 sys.setdefaultencoding('utf-8')
 
-# f = open('../data/user_tag_query.2W.TRAIN', 'r')
+f = open('../data/user_tag_query.2W.TRAIN', 'r')
 
-f = open('../data/test.txt', 'r')
+# f = open('../data/test.txt', 'r')
 
 wordSet = set()
 
@@ -44,7 +44,14 @@ for (key, value) in c.items():
 dict = sorted(c.iteritems(), key=lambda d: d[1], reverse=True)
 print dict
 
+import codecs
+
+file = codecs.open('../data/keywords.txt', 'w')
+
 for (key, value) in dict:
     print str(key) + ":" + str(value)
+    file.write(str(key) + "\t" + str(value) + "\n")
+
+file.close()
 
 # matrix = zeros((20000, len(globalSet)))  # 初始化大矩阵,20000行-len(globalSet)列
