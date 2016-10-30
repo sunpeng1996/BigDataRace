@@ -1,7 +1,7 @@
 # encoding=utf-8
-# 此文件是用py3版本运行的
-fKeyWords = open('../data/keywords.txt', 'r', encoding='utf-8')
-fStopWords = open('../data/stopword', 'r', encoding='utf-8')
+# 此文件是用py2版本运行的
+fKeyWords = open('../data/keywords.txt', 'r')
+fStopWords = open('../data/stopword', 'r')
 
 stopwordList = []
 
@@ -13,7 +13,7 @@ print(stopwordList)
 
 import codecs
 
-file = codecs.open('../data/keywords_filtered.txt', 'w', encoding='utf-8')
+file = codecs.open('../data/keywords_filtered.txt', 'w')
 
 for keyword in fKeyWords.readlines():
     list = keyword.split('\t')
