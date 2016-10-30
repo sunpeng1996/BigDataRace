@@ -30,7 +30,6 @@ begin_x = 0  # 初始化矩阵索引
 
 with open('../data/user_tag_query.2W.TEST') as f:
     for line in f.readlines():
-
         if begin_x >= 1000:
             break
 
@@ -54,6 +53,7 @@ with open('../data/user_tag_query.2W.TEST') as f:
         begin_x = begin_x + 1
 
 # 降维
+print ids
 from sklearn.decomposition import PCA
 
 COMPONENT_NUM = 1000  # 设置pca降维的维度值
@@ -67,18 +67,22 @@ print train_data.shape
 
 y_pred = []
 # predict
-for x_test in np.array(train_data):
-    y_predTemp1 = clf1.predict(x_test)
-    y_predTemp2 = clf2.predict(x_test)
-    y_predTemp3 = clf3.predict(x_test)
-    print y_predTemp1
-    print y_predTemp2
-    print y_predTemp3
-    print '---------'
+print('Saving...')  # 保存预测结果
+count = 0
+import codecs
 
-# print('Saving...')  # 保存预测结果
-# with open('predict.csv') as writer:
-#     count = 0
-#     for p in y_pred:
-#         writer.write(ids[count] + "," + p[0] + "," + p[1] + "," + p[2] + '"\n')
-#         count += 1
+with codecs.open('predict.csv', 'w', 'gbk') as writer:
+    for x_test in np.array(train_data):
+        y_predTemp1 = clf1.predict(x_test)
+        y_predTemp2 = clf2.predict(x_test)
+        y_predTemp3 = clf3.predict(x_test)
+        print y_predTemp1
+        print y_predTemp2
+        print y_predTemp3
+        print '---------'
+        writer.write(
+            str(ids[count][0]) + ' ' + str(y_predTemp1[0]) + ' ' + str(y_predTemp2[0]) + ' ' + str(
+                y_predTemp3[0]) + '\n')
+        count += 1
+
+print 'over!#$%^&*()^%$#@!@#$%^&*(~~~~~~~~~~~'

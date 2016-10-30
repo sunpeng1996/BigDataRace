@@ -1,10 +1,10 @@
 # coding = utf-8
 import pickle
 
-data_x = open("data_x.pkl", 'rb')
-data_y = open("data_y.pkl", 'rb')
+from itertools import islice
 
-dataX = pickle.load(data_x)
-dataY = pickle.load(data_y)
+input_file = open("test")
+for line in islice(input_file, 2, None):
+    print line
 
 
