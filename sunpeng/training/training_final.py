@@ -9,12 +9,24 @@ fkeywords = open('../data/keywords_filtered.txt', 'r')
 
 # matrix = zeros((1000, 20000))  # 初始化1000行,2W列的大矩阵
 
-from sklearn.svm import SVC
+# from sklearn.svm import SVC
+#
+# # 初始化SVM
+# clf1 = SVC()
+# clf2 = SVC()
+# clf3 = SVC()
 
-# 初始化SVM
-clf1 = SVC()
-clf2 = SVC()
-clf3 = SVC()
+# from sklearn.linear_model import LogisticRegression
+#
+# clf1 = LogisticRegression()
+# clf2 = LogisticRegression()
+# clf3 = LogisticRegression()
+
+from sklearn.linear_model import SGDClassifier
+
+clf1 = SGDClassifier()
+clf2 = SGDClassifier()
+clf3 = SGDClassifier()
 
 # 降维
 from sklearn.decomposition import PCA
@@ -31,8 +43,8 @@ print(keywordList)  # 大关键词列表
 
 from itertools import islice
 
-for batch in range(20):
-    ftrainingData = open('../data/user_tag_query.2W.TRAIN', 'r')
+for batch in range(17):
+    ftrainingData = open('../data/filter_zero.csv', 'r')
     print "sunpeng{0}".format(batch)
     matrix = zeros((1000, 20000))
     # batch 为 训练集分成20批次的每一批次的批次号
@@ -62,20 +74,22 @@ for batch in range(20):
                 begin_y = begin_y + 1
         begin_x = begin_x + 1
     print matrix.shape
-    print np.array(y_train).shape
+    print np.array(y_train)
     print "PCA......{0}".format(batch)
-    pca.fit(matrix)
-    train_data = pca.transform(matrix)  # Fit the model with X and 在X上完成降维.
+    # pca.fit(matrix)
+    # train_data = pca.transform(matrix)  # Fit the model with X and 在X上完成降维.
+    # np.savetxt("train_data_{0}".format(batch), np.array(y_train))
     print "training......{0}".format(batch)
-    clf1.fit(train_data, np.array(y_train)[:, 0])  # 训练
-    clf2.fit(train_data, np.array(y_train)[:, 1])  # 训练
-    clf3.fit(train_data, np.array(y_train)[:, 2])  # 训练
+    clf1.fit(np.array(matrix), np.array(y_train)[:, 0])  # 训练
+    clf2.fit(np.array(matrix), np.array(y_train)[:, 1])  # 训练
+    clf3.fit(np.array(matrix), np.array(y_train)[:, 2])  # 训练
+    print "training y...{0}--{1}--{2}".format(np.array(y_train)[:, 0], np.array(y_train)[:, 1], np.array(y_train)[:, 2])
 
 print "train all over-----"
 
 # 保存模型到本地
 from sklearn.externals import joblib
 
-joblib.dump(clf1, "train_model1.m")
-joblib.dump(clf2, "train_model2.m")
-joblib.dump(clf3, "train_model3.m")
+joblib.dump(clf1, "train_model1_lr.m_111")
+joblib.dump(clf2, "train_model2_lr.m_111")
+joblib.dump(clf3, "train_model3_lr.m_111")

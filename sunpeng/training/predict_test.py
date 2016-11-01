@@ -7,9 +7,9 @@ from sklearn.svm import SVC
 from sklearn.externals import joblib
 
 # 加载本地模型
-clf1 = joblib.load("train_model1.m")
-clf2 = joblib.load("train_model2.m")
-clf3 = joblib.load("train_model3.m")
+clf1 = joblib.load("train_model1.m_1031")
+clf2 = joblib.load("train_model2.m_1031")
+clf3 = joblib.load("train_model3.m_1031")
 
 # 加载测试集并且构建稀疏矩阵
 fkeywords = open('../data/keywords_filtered.txt', 'r')
