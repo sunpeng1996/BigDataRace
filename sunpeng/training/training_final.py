@@ -47,7 +47,7 @@ for batch in range(17):
     ftrainingData = open('../data/filter_zero.csv', 'r')
     print "sunpeng{0}".format(batch)
     matrix = zeros((1000, 20000))
-    # batch 为 训练集分成20批次的每一批次的批次号
+    # batch 为 训练集分成17批次的每一批次的批次号
     x_train = []
     y_train = []
     begin_x = batch * 1000  # 初始化矩阵索引
@@ -75,7 +75,7 @@ for batch in range(17):
         begin_x = begin_x + 1
     print matrix.shape
     print np.array(y_train)
-    print "PCA......{0}".format(batch)
+    # print "PCA......{0}".format(batch)
     # pca.fit(matrix)
     # train_data = pca.transform(matrix)  # Fit the model with X and 在X上完成降维.
     # np.savetxt("train_data_{0}".format(batch), np.array(y_train))
@@ -84,6 +84,10 @@ for batch in range(17):
     clf2.fit(np.array(matrix), np.array(y_train)[:, 1])  # 训练
     clf3.fit(np.array(matrix), np.array(y_train)[:, 2])  # 训练
     print "training y...{0}--{1}--{2}".format(np.array(y_train)[:, 0], np.array(y_train)[:, 1], np.array(y_train)[:, 2])
+    print clf1.score(np.array(matrix), np.array(y_train)[:, 0])
+    print clf2.score(np.array(matrix), np.array(y_train)[:, 1])
+    print clf3.score(np.array(matrix), np.array(y_train)[:, 2])
+    print 'score~~~~~~~'
 
 print "train all over-----"
 
