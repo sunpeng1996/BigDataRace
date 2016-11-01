@@ -1,4 +1,4 @@
-# -*- coding: cp936 -*-
+# -*- coding: utf-8 -*-
 import jieba
 import jieba.posseg as pseg
 import os
@@ -15,36 +15,44 @@ sys.setdefaultencoding("utf-8")
 # sys.path.append("C:\Users\Administrator\Desktop\9.17")
 from numpy import *
 
-fr = open('../data/filter_zero.csv')
+# fr = open('../data/filter_zero.csv')
+fr = open('../tfidf/train_1_1500.csv')
+
 fr_list = fr.read()
 dataList = fr_list.split('\n')
-dataList = dataList[4:]
 data = []
 for oneline in dataList:
-    data.append(" ".join(jieba.cut(oneline)))
+    print len(oneline)
+    data.append(" ".join(jieba.cut_for_search(oneline[39:])))
+    # data.append(" ".join(jieba.cut(oneline[39:])))
+print "ç»“å·´åˆ†è¯over"
 
-print "½á°Í·Ö´Êover"
-
-# ½«µÃµ½µÄ´ÊÓï×ª»»Îª´ÊÆµ¾ØÕó
+# å°†å¾—åˆ°çš„è¯è¯­è½¬æ¢ä¸ºè¯é¢‘çŸ©é˜µ
 freWord = CountVectorizer()
 
-print "´ÊÆµ¾ØÕóover"
+print "è¯é¢‘çŸ©é˜µover"
 
-# Í³¼ÆÃ¿¸ö´ÊÓïµÄtf-idfÈ¨Öµ
+# ç»Ÿè®¡æ¯ä¸ªè¯è¯­çš„tf-idfæƒå€¼
 transformer = TfidfTransformer()
-# ¼ÆËã³ötf-idf(µÚÒ»¸öfit_transform),²¢½«Æä×ª»»Îªtf-idf¾ØÕó(µÚ¶ş¸öfit_transformer)
+# è®¡ç®—å‡ºtf-idf(ç¬¬ä¸€ä¸ªfit_transform),å¹¶å°†å…¶è½¬æ¢ä¸ºtf-idfçŸ©é˜µ(ç¬¬äºŒä¸ªfit_transformer)
 tfidf = transformer.fit_transform(freWord.fit_transform(data))
 
-# print tfidf
+print type(tfidf)  # <class 'scipy.sparse.csr.csr_matrix'>
+print tfidf.shape
 print "tfidf over~"
-# »ñÈ¡´Ê´üÄ£ĞÍÖĞµÄËùÓĞ´ÊÓï
+# è·å–è¯è¢‹æ¨¡å‹ä¸­çš„æ‰€æœ‰è¯è¯­
 word = freWord.get_feature_names()
 
-# µÃµ½È¨ÖØ
-# weight = tfidf.toarray()
-weight = np.array(tfidf, dtype='float16')
+# å¾—åˆ°æƒé‡
+weight = tfidf.toarray()
+# weight = np.array(np.array(tfidf), dtype='float16')
 
+print type(weight)  # <type 'numpy.ndarray'>
+print weight
 print "weight over"
+
+print len(weight)
+print weight.shape
 
 tfidfDict = {}
 for i in range(len(weight)):
@@ -59,7 +67,7 @@ for i in range(len(weight)):
 sorted_tfidf = sorted(tfidfDict.iteritems(),
                       key=lambda d: d[1], reverse=True)
 
-print "ÅÅĞòover"
-fw = open('result.txt', 'w')
+print "æ’åºover"
+fw = open('../tfidf/result_1.txt', 'w')
 for i in sorted_tfidf:
     fw.write(i[0] + '\t' + str(i[1]) + '\n')
