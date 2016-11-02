@@ -5,7 +5,7 @@ import numpy as np
 
 # 此文件被py2版本执行
 
-fkeywords = open('../data/keywords_filtered.txt', 'r')
+fkeywords = open('../data/keywords_filtered_第一次的特征.txt', 'r')
 ftrainingData = open('../data/user_tag_query.2W.TRAIN', 'r')
 
 matrix = zeros((1000, 20000))  # 初始化2W行,2W列的大矩阵

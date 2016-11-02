@@ -5,7 +5,7 @@ import jieba
 from numpy import *
 import numpy as np
 
-fkeywords = open('../data/keywords_filtered.txt', 'r')
+fkeywords = open('../data/keywords_filtered_feature_2.txt', 'r')
 
 # from sklearn.linear_model import SGDClassifier
 #
@@ -91,9 +91,9 @@ labelsAll = []
 from sklearn.externals import joblib
 
 # 加载本地模型
-clf1 = joblib.load("../model/train_model1_lr.m_111")
-clf2 = joblib.load("../model/train_model2_lr.m_111")
-clf3 = joblib.load("../model/train_model3_lr.m_111")
+clf1 = joblib.load("../model/train_model1_lr.m_112")
+clf2 = joblib.load("../model/train_model2_lr.m_112")
+clf3 = joblib.load("../model/train_model3_lr.m_112")
 
 for batch in range(5):
     matrix = zeros((1000, 20000), dtype=int8)  # 初始化2W行,2W列的大矩阵

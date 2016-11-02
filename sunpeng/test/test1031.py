@@ -18,7 +18,7 @@ COMPONENT_NUM = 1000  # 设置pca降维的维度值
 pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 keywordList = []
 # 构建稀疏矩阵的列
-fkeywords = open('../data/keywords_filtered.txt', 'r')
+fkeywords = open('../data/keywords_filtered_第一次的特征.txt', 'r')
 for keyword in fkeywords.readlines():
     keywordList.append(str(keyword.strip('\n')))
 

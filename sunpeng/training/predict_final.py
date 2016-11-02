@@ -8,9 +8,9 @@ from sklearn.externals import joblib
 import codecs
 
 # 加载本地模型
-clf1 = joblib.load("train_model1_lr.m_111")
-clf2 = joblib.load("train_model2_lr.m_111")
-clf3 = joblib.load("train_model3_lr.m_111")
+clf1 = joblib.load("train_model1_lr.m_112")
+clf2 = joblib.load("train_model2_lr.m_112")
+clf3 = joblib.load("train_model3_lr.m_112")
 
 from sklearn.decomposition import PCA
 
@@ -18,7 +18,7 @@ from sklearn.decomposition import PCA
 # pca = PCA(n_components=COMPONENT_NUM, whiten=True)
 keywordList = []
 # 构建稀疏矩阵的列
-fkeywords = open('../data/keywords_filtered.txt', 'r')
+fkeywords = open('../data/keywords_filtered_feature_2.txt', 'r')
 for keyword in fkeywords.readlines():
     keywordList.append(str(keyword.strip('\n')))
 
@@ -26,7 +26,7 @@ print(keywordList)  # 大关键词列表
 
 from itertools import islice
 
-with codecs.open('predict_111.csv', 'w', 'gbk') as writer:
+with codecs.open('predict_112.csv', 'w', 'gbk') as writer:
     # 加载测试集并且构建稀疏矩阵
     for batch in range(20):
         matrix = zeros((1000, 20000), dtype=int8)  # 初始化2W行,2W列的大矩阵

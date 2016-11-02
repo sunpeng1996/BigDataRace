@@ -5,7 +5,7 @@ import jieba
 from numpy import *
 import numpy as np
 
-fkeywords = open('../data/keywords_filtered.txt', 'r')
+fkeywords = open('../data/keywords_filtered_feature_2.txt', 'r')
 
 # matrix = zeros((1000, 20000))  # 初始化1000行,2W列的大矩阵
 
@@ -94,6 +94,6 @@ print "train all over-----"
 # 保存模型到本地
 from sklearn.externals import joblib
 
-joblib.dump(clf1, "train_model1_lr.m_111")
-joblib.dump(clf2, "train_model2_lr.m_111")
-joblib.dump(clf3, "train_model3_lr.m_111")
+joblib.dump(clf1, "train_model1_lr.m_112")
+joblib.dump(clf2, "train_model2_lr.m_112")
+joblib.dump(clf3, "train_model3_lr.m_112")
