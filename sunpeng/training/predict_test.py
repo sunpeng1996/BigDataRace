@@ -12,7 +12,7 @@ clf2 = joblib.load("train_model2.m_1031")
 clf3 = joblib.load("train_model3.m_1031")
 
 # 加载测试集并且构建稀疏矩阵
-fkeywords = open('../data/keywords_filtered_第一次的特征.txt', 'r')
+fkeywords = open('../data/keywords_filtered_feature_1.txt', 'r')
 
 matrix = zeros((1000, 20000), dtype=int8)  # 初始化2W行,2W列的大矩阵
 
